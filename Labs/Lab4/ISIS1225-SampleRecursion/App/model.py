@@ -27,7 +27,7 @@
 import random
 import config as cf
 assert cf
-
+import Lista as lis 
 """
 Se define la estructura de un catálogo de libros.
 El catálogo tendrá tres listas, una para libros, otra para autores
@@ -49,10 +49,10 @@ def newCatalog():
                "tags": None,
                "book_tags": None}
 
-    catalog["books"] = new_list()
-    catalog["authors"] = new_list()
-    catalog["tags"] = new_list()
-    catalog["book_tags"] = new_list()
+    catalog["books"] = lis.new_list()
+    catalog["authors"] = lis.new_list()
+    catalog["tags"] = lis.new_list()
+    catalog["book_tags"] = lis.new_list()
 
     return catalog
 
