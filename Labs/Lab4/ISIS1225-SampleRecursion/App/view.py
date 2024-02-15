@@ -29,7 +29,7 @@ import gc
 # TODO importar la libreria threading (parte 2)
 import controller
 assert cf
-import Lista as lis 
+
 """
 La vista se encarga de la interacción con el usuario
 Presenta el menu de opciones  y  por cada seleccion

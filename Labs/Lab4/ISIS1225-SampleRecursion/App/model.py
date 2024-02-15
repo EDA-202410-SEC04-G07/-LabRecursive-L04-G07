@@ -61,7 +61,7 @@ def newCatalog():
 
 def addBook(catalog, book):
     # Se adiciona el libro a la lista de libros
-    add_last(catalog["books"], book)
+    lis.add_last(catalog["books"], book)
     # Se obtienen los autores del libro
     authors = book["authors"].split(",")
     # Cada autor, se crea en la lista de libros del catalogo, y se
@@ -82,8 +82,8 @@ def addBookAuthor(catalog, authorname, book):
         author = lt.getElement(authors, posauthor)
     else:
         author = newAuthor(authorname)
-        add_last(authors, author)
-    add_last(author["books"], book)
+        lis.add_last(authors, author)
+    lis.add_last(author["books"], book)
     return catalog
 
 
@@ -92,7 +92,7 @@ def addTag(catalog, tag):
     Adiciona un tag a la lista de tags
     """
     t = newTag(tag["tag_name"], tag["tag_id"])
-    add_last(catalog["tags"], t)
+    lis.add_last(catalog["tags"], t)
     return catalog
 
 
@@ -101,7 +101,7 @@ def addBookTag(catalog, booktag):
     Adiciona un tag a la lista de tags
     """
     t = newBookTag(booktag["tag_id"], booktag["goodreads_book_id"])
-    add_last(catalog["book_tags"], t)
+    lis.add_last(catalog["book_tags"], t)
     return catalog
 
 
@@ -114,7 +114,7 @@ def newAuthor(name):
     """
     author = {"name": "", "books": None,  "average_rating": 0}
     author["name"] = name
-    author["books"] = new_list()
+    author["books"] = lis.new_list()
     return author
 
 
@@ -152,10 +152,10 @@ def getBestBooks(catalog, number):
     Retorna los mejores libros
     """
     books = catalog["books"]
-    bestbooks = new_list()
+    bestbooks = lis.new_list()
     while number > 0:
         book = get_first(books)
-        add_last(bestbooks, book)
+        lis.add_last(bestbooks, book)
         books['head'] = books['head']['next']
         number -= 1
     return bestbooks
@@ -251,7 +251,7 @@ def shuffleBooks(catalog):
     books = catalog["books"]
     element_num = size(books)
     # creo la nueva lista desordenada vacia
-    shuffled_list = new_list()
+    shuffled_list = lis.new_list()
     i = 0
     # itero la lista de libros y agrego un libro aleatorio a la nueva lista
     while i < element_num:
@@ -260,7 +260,7 @@ def shuffleBooks(catalog):
         # selecciono un indice aleatorio de un libro
         ridx = random.randint(1, tsize)
         # agregro el libro a la nueva lista y lo elimino de la lista original
-        add_last(shuffled_list, get_element(books, ridx))
+        lis.add_last(shuffled_list, get_element(books, ridx))
         delete(books, ridx)
         i += 1
     # actualizo la lista de libros del catalogo
