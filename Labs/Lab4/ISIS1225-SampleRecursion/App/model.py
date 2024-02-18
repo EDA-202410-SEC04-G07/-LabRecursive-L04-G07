@@ -230,17 +230,14 @@ def compareISBN(book1, book2):
 # Funciones de ordenamiento
 
 def sortBooks(catalog):
-    """
-    Ordena los libros por ISBN
-    """
-    # TODO examinar el ordenamiento (parte 1)
-    # toma la lista de libros del catalogo
-    books = catalog["books"]
-    # ordena la lista de libros
-    sorted_list = sort(books, compareISBN)
-    # actualiza la lista de libros del catalogo
-    catalog["books"] = sorted_list
-    return sorted_list
+   """
+   Ordena los libros por ISBN
+   """
+# TODO examinar el ordenamiento (parte 1)
+   books = catalog["books"]
+   sorted_list = sort(books, compareISBN)
+   catalog["books"] = sorted_list
+   return sorted_list
 
 
 def shuffleBooks(catalog):
