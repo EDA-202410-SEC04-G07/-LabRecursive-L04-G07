@@ -70,6 +70,7 @@ def loadBooks(catalog):
     """
     # TODO cambiar nombre del archivo (parte 1)
     booksfile = cf.data_dir + "GoodReads/books.csv"
+    print(booksfile)
     input_file = csv.DictReader(open(booksfile, encoding="utf-8"))
     for book in input_file:
         # preprocesamiento de los datos para convertirlos al tipo correcto

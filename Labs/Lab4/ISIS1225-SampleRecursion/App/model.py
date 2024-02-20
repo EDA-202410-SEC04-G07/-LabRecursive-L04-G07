@@ -27,7 +27,7 @@
 import random
 import config as cf
 assert cf
-import Lista as lis 
+import Funciones.Lista as lis 
 """
 Se define la estructura de un catálogo de libros.
 El catálogo tendrá tres listas, una para libros, otra para autores
@@ -77,9 +77,9 @@ def addBookAuthor(catalog, authorname, book):
     a los libros de dicho autor
     """
     authors = catalog["authors"]
-    posauthor = lt.isPresent(authors, authorname)
+    posauthor = lis.isPresent(authors, authorname)
     if posauthor > 0:
-        author = lt.getElement(authors, posauthor)
+        author = lis.getElement(authors, posauthor)
     else:
         author = newAuthor(authorname)
         lis.add_last(authors, author)
@@ -176,19 +176,19 @@ def countBooksByTag(catalog, tag):
 
 
 def bookSize(catalog):
-    return size(catalog["books"])
+    return catalog["books"]["size"]
 
 
 def authorSize(catalog):
-    return size(catalog["authors"])
+    return catalog["authors"]["size"]
 
 
 def tagSize(catalog):
-    return size(catalog["tags"])
+    return catalog["tags"]["size"]
 
 
 def bookTagSize(catalog):
-    return size(catalog["book_tags"])
+    return catalog["book_tags"]["size"]
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
