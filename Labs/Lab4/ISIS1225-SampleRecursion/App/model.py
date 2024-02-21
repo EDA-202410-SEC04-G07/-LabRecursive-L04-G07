@@ -280,8 +280,19 @@ def searchBookByISBN(catalog, bookisbn):
         book: el diccionario que cumple con el ISBN dentro de la
         lista de libros
     """
-    # TODO implementar la mascara de la busqueda recursiva (parte 2)
-    pass
+
+    def recursive_search(books, isbn):
+    
+        if not books:
+            return None
+
+        if books[0]['isbn'] == isbn:
+            return books[0]
+
+        return recursive_search(books[1:], isbn)
+
+    return recursive_search(catalog['books'], bookisbn)
+
 
 
 def recursiveSearchBookByISBN(books, bookisbn, low, high):
@@ -298,8 +309,17 @@ def recursiveSearchBookByISBN(books, bookisbn, low, high):
     Returns:
         int: indice del libro en la lista, -1 si no lo encuentra
     """
-    # TODO implementar recursivamente binary search (parte 2)
-    pass
+    if low > high:
+        return -1
+
+    mid = (low + high) // 2
+
+    if books[mid]['isbn13'] == bookisbn:
+        return mid
+    elif books[mid]['isbn13'] < bookisbn:
+        return recursiveSearchBookByISBN(books, bookisbn, mid + 1, high)
+    else:
+        return recursiveSearchBookByISBN(books, bookisbn, low, mid - 1)
 
 
 def iterativeSearchBookByISBN(catalog, bookid):
@@ -315,8 +335,22 @@ def iterativeSearchBookByISBN(catalog, bookid):
         book: el diccionario que cumple con el ISBN dentro de la
         lista de libros
     """
-    # TODO implementar iterativamente del binary search (parte 2)
-    pass
+    books = catalog['books']
+
+    low = 0
+    high = len(books) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if books[mid]['isbn13'] == bookisbn:
+            return books[mid]
+        elif books[mid]['isbn13'] < bookisbn:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
 
 
 # funciones para calcular estadisticas
