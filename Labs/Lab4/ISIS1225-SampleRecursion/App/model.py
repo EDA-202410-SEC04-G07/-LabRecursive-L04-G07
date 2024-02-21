@@ -280,11 +280,19 @@ def searchBookByISBN(catalog, bookisbn):
         book: el diccionario que cumple con el ISBN dentro de la
         lista de libros
     """
-    # TODO implementar la mascara de la busqueda recursiva (parte 2)
-    books = catalog["books"]
-    high  = books["size"]-1
-    find = recursiveSearchBookByISBN(books, bookisbn, 0, high)
-    return find
+
+    def recursive_search(books, isbn):
+    
+        if not books:
+            return None
+
+        if books[0]['isbn'] == isbn:
+            return books[0]
+
+        return recursive_search(books[1:], isbn)
+
+    return recursive_search(catalog['books'], bookisbn)
+
 
 
 def recursiveSearchBookByISBN(books, bookisbn, low, high):
@@ -301,27 +309,20 @@ def recursiveSearchBookByISBN(books, bookisbn, low, high):
     Returns:
         int: indice del libro en la lista, -1 si no lo encuentra
     """
-    # TODO implementar recursivamente binary search (parte 2)
-    if low <= high:
-        mid = (low + high) // 2
-        
-        
-        if books[mid] == bookisbn:
-            return mid
-        
-        
-        elif books[mid] > bookisbn:
-            return recursiveSearchBookByISBN(books, bookisbn, low, mid - 1)
-        
-        else:
-            return recursiveSearchBookByISBN(books, bookisbn, mid + 1, high)
-    
-    
-    return -1
-   
+    if low > high:
+        return -1
+
+    mid = (low + high) // 2
+
+    if books[mid]['isbn13'] == bookisbn:
+        return mid
+    elif books[mid]['isbn13'] < bookisbn:
+        return recursiveSearchBookByISBN(books, bookisbn, mid + 1, high)
+    else:
+        return recursiveSearchBookByISBN(books, bookisbn, low, mid - 1)
 
 
-def iterativeSearchBookByISBN(catalog, bookid):
+def iterativeSearchBookByISBN(catalog, bookisbn):
     """iterativeSearchBookByISBN ejecuta iterativamente la busqueda binaria el
     ISBN del libro en la lista, si no lo encuentra retorna -1, utiliza la llave
     "isbn13" para la comparacion
@@ -334,26 +335,21 @@ def iterativeSearchBookByISBN(catalog, bookid):
         book: el diccionario que cumple con el ISBN dentro de la
         lista de libros
     """
-    # TODO implementar iterativamente del binary search (parte 2)
-    
-    left = 0
-    right = catalog['books']['size'] - 1
-    lista_ordenada = sortBooks(catalog)
-    while left <= right:
-        mid = (left + right) // 2
-        
-        
-        if lista_ordenada[mid] == bookid:
-            return mid
-        
-        
-        elif lista_ordenada[mid] < bookid:
-            left = mid + 1
-        
+    books = catalog['books']
+
+    low = 0
+    high = len(books) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if books[mid]['isbn13'] == bookisbn:
+            return books[mid]
+        elif books[mid]['isbn13'] < bookisbn:
+            low = mid + 1
         else:
-            right = mid - 1
-    
-   
+            high = mid - 1
+
     return -1
 
 
