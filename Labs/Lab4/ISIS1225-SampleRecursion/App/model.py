@@ -235,7 +235,7 @@ def sortBooks(catalog):
    """
 # TODO examinar el ordenamiento (parte 1)
    books = catalog["books"]
-   sorted_list = sort(books, compareISBN)
+   sorted_list = lis.sort(books, compareISBN)
    catalog["books"] = sorted_list
    return sorted_list
 

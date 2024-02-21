@@ -29,6 +29,7 @@ import gc
 # TODO importar la libreria threading (parte 2)
 import controller
 assert cf
+import Funciones.Lista as lis 
 
 #actualiza limite de recursión
 default_limit = 1000
@@ -96,10 +97,10 @@ def printBestBooks(books):
 
 
 def printSortResults(sort_books, sample=3):
-    if is_empty(sort_books):
+    if lis.isEmpty(sort_books):
         print("La lista esta vacia!!!...")
     else:
-        size = size(sort_books)
+        size = sort_books['size']
         if size <= sample*2:
             print("Los", size, "libros ordenados son:")
             for book in iterator(sort_books):
@@ -109,7 +110,7 @@ def printSortResults(sort_books, sample=3):
             print("Los", sample, "primeros libros ordenados son:")
             i = 1
             while i <= sample:
-                book = get_element(sort_books, i)
+                book = lis.getElement(sort_books, i)
                 print("Titulo:", book["title"], "ISBN:", book["isbn13"],
                       "Rating:", book["average_rating"])
                 i += 1
@@ -117,7 +118,7 @@ def printSortResults(sort_books, sample=3):
             print("Los", sample, "últimos libros ordenados son:")
             i = size - sample + 1
             while i <= size:
-                book = get_element(sort_books, i)
+                book = lis.getElement(sort_books, i)
                 print("Titulo:", book["title"], "ISBN:", book["isbn13"],
                       "Rating:", book["average_rating"])
                 i += 1
@@ -186,7 +187,7 @@ def menu_cycle():
             result = controller.sortBooks(control)
             delta_time = f"{result[0]:.3f}"
             sorted_list = result[1]
-            size = lt.size(sorted_list)
+            size = sorted_list["size"]
             print("===== Los libros ordenados por ISBN son: =====")
             print("Para", size, "elementos, tiempo:", str(delta_time), "[ms]")
             printSortResults(sorted_list)
